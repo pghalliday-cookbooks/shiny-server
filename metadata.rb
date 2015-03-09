@@ -1,0 +1,6 @@
+name 'shiny-server'
+version '0.1.0'
+depends 'r'
+depends 'gdebi'
+supports 'ubuntu'
+supports 'centos'
