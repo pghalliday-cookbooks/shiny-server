@@ -9,16 +9,20 @@ case node['platform']
 when 'ubuntu'
   include_recipe 'gdebi::default'
   deb = ::File.join(Chef::Config[:file_cache_path], 'shiny-server.deb')
+  url = node['shiny-server']['ubuntu']['deb']
+  checksum = node['shiny-server']['ubuntu']['checksum']
   remote_file deb do
-    source 'http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb'
-    checksum '072d71a6039d9340da5006ea0ccd7f045f94466e5ed993e981d110c66d474273'
+    source url
+    checksum checksum
   end
   gdebi_package deb
 when 'centos'
   rpm = ::File.join(Chef::Config[:file_cache_path], 'shiny-server.rpm')
+  url = node['shiny-server']['centos']['rpm']
+  checksum = node['shiny-server']['centos']['checksum']
   remote_file rpm do
-    source 'http://download3.rstudio.org/centos-5.9/x86_64/shiny-server-1.3.0.403-rh5-x86_64.rpm'
-    checksum '2d9006b9ce4e027ab0fb096adcc7bdcdc1800313393f725e5e8aa9c699857ca4'
+    source url
+    checksum checksum
     notifies :run, 'bash[install shiny server]', :immediately
   end
   # using the standard package resource fails
