@@ -15,9 +15,6 @@ action :add do
       r_package dependency
     end
   end
-  directory repository_dir do
-    recursive true
-  end
   link app_link do
     to path
   end
