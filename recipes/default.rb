@@ -45,5 +45,6 @@ end
 
 service 'shiny-server' do
   supports status: true, restart: true, reload: true
+  action [:enable, :start]
   provider Chef::Provider::Service::Upstart
 end
